@@ -2,7 +2,7 @@
 
 > **Status: Backlog** — A React Native / Expo client is **not** in active development. Due to the overhead of maintaining a native mobile stack alongside the API and web client, MVP delivery uses **TanStack Start** as a **desktop + PWA** web app instead.
 >
-> **Active client:** [WEB.md](./WEB.md) — check-in, auth, analytics, and installable PWA behavior are specified and built there.
+> **Active client:** [WEB.md](../apps/web/docs/WEB.md) — check-in, auth, analytics, and installable PWA behavior are specified and built there.
 >
 > Keep this document as a **future reference** for when a native app is revisited. Screen layouts, flows, and API contracts below remain valid design input; implementation targets `apps/mobile` only if/when native work resumes.
 
@@ -21,7 +21,7 @@ The attached UI mockups (check-in slider screen, relief dashboard, anonymous hom
 | **P1** | Show confirmation and recent check-in history from `GET /api/v1/check-ins`. |
 | **P2** | Exercise assignment flow (SSE + card + complete). |
 
-Until native work starts, these goals are met by the **web/PWA client** ([WEB.md](./WEB.md)).
+Until native work starts, these goals are met by the **web/PWA client** ([WEB.md](../apps/web/docs/WEB.md)).
 
 ---
 
@@ -61,7 +61,7 @@ apps/mobile/          ← Backlog placeholder; Expo app if native resumes
 packages/types/       ← Shared TypeScript types
 packages/validators/  ← Zod schemas (CreateCheckInSchema, etc.)
 apps/api/             ← NestJS backend
-docs/WEB.md           ← Active client design
+apps/web/docs/WEB.md  ← Active client design
 docs/MOBILE.md        ← This file (backlog)
 ```
 
@@ -417,7 +417,7 @@ Relief dashboard mockup maps to this tab once SSE + assignment UI ship.
 
 ## Local development (when native work resumes)
 
-> Not applicable while native mobile is on backlog. Use [WEB.md](./WEB.md) for the active client dev setup.
+> Not applicable while native mobile is on backlog. Use [WEB.md](../apps/web/docs/WEB.md) for the active client dev setup.
 
 ### Prerequisites
 
@@ -542,7 +542,7 @@ Manual QA checklist:
 
 ## Implementation phases (backlog)
 
-These phases apply **only if** native mobile development is restarted. Until then, equivalent work lives under [WEB.md](./WEB.md).
+These phases apply **only if** native mobile development is restarted. Until then, equivalent work lives under [WEB.md](../apps/web/docs/WEB.md).
 
 ### Phase A — Scaffold & auth
 
@@ -570,7 +570,7 @@ These phases apply **only if** native mobile development is restarted. Until the
 
 ## Related docs
 
-- [WEB.md](./WEB.md) — **active** TanStack Start client (desktop + PWA)
+- [WEB.md](../apps/web/docs/WEB.md) — **active** TanStack Start client (desktop + PWA)
 - [PRD.md](./PRD.md) — product scope
 - [DESIGN.md](./DESIGN.md) — visual system
 - [apps/api/docs/API.md](../apps/api/docs/API.md) — REST contracts
