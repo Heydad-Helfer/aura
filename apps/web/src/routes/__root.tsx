@@ -9,7 +9,9 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ErrorPage } from "#/components/layout/error/Error";
+import Footer from "#/components/layout/Footer/Footer";
 import { Header } from "#/components/layout/Header/Header";
+import { Toaster } from "#/components/ui/sonner";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -48,11 +50,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body className="flex min-h-screen flex-col bg-surface">
+			<body className="font-sans antialiased wrap-anywhere">
 				<ClerkProvider>
-					<Header />
-					<main className="flex-1">{children}</main>
+					<div className="flex min-h-dvh flex-col">
+						<Header />
+						<main className="flex-1">{children}</main>
+						<Footer />
+					</div>
 				</ClerkProvider>
+				<Toaster />
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",
