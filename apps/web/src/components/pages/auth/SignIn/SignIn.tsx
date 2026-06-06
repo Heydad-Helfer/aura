@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noChildrenProp: That is the expected way in TanStack Form */
 import { Link } from "@tanstack/react-router";
 import { Button, buttonVariants } from "#/components/ui/button";
 import {
@@ -8,10 +9,14 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
+import { Spinner } from "#/components/ui/spinner";
+import useSignInForm from "#/hooks/useSignInForm";
 import { cn } from "#/lib/utils";
 import SignInForm from "./SignInForm";
 
 const SignIn = () => {
+	const form = useSignInForm();
+
 	return (
 		<Card className="w-full max-w-md mx-auto mt-10">
 			<CardHeader className="text-center">
@@ -23,17 +28,33 @@ const SignIn = () => {
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<SignInForm />
+				<SignInForm form={form} />
 			</CardContent>
 			<CardFooter className="flex justify-around gap-2">
-				<Button
-					type="submit"
-					variant="default"
-					form="sign-in-form"
-					className="flex-1 cursor-pointer"
-				>
-					Sign In
-				</Button>
+				<form.Subscribe
+					selector={(state) => [state.canSubmit, state.isSubmitting]}
+					children={([canSubmit, isSubmitting]) => {
+						console.log(canSubmit, isSubmitting);
+						return (
+							<Button
+								type="submit"
+								variant="default"
+								form="sign-in-form"
+								className="flex-1 cursor-pointer"
+								disabled={!canSubmit}
+							>
+								{isSubmitting ? (
+									<>
+										<Spinner className="w-4 h-4 mr-2" />
+										Signing in...
+									</>
+								) : (
+									<>Sign In</>
+								)}
+							</Button>
+						);
+					}}
+				/>
 				<Link
 					to={"/sign-up/$"}
 					className={cn(

@@ -1,14 +1,17 @@
 import { z } from "zod";
 
-export const signInSchema = z
-	.object({
-		email: z.email(),
-		password: z.string(),
-	})
-	.refine((data) => data.email && data.password, {
-		message: "Email and password are required",
-		path: ["email", "password"],
-	});
+export const emailSchema = z.email();
+
+export const signInSchema = z.object({
+	email: emailSchema,
+	password: z.string().min(1, "Password is required"),
+});
+
+export const getEmailFieldError = (value: string): string | undefined => {
+	const result = emailSchema.safeParse(value);
+	if (result.success) return undefined;
+	return result.error.issues.map((issue) => issue.message).join(", ");
+};
 
 export type SignInSchema = z.infer<typeof signInSchema>;
 

@@ -8,15 +8,21 @@ import {
 	FieldLabel,
 } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
-import useSignInForm from "#/hooks/useSignInForm";
+import type useSignInForm from "#/hooks/useSignInForm";
+import {
+	emailSchema,
+	getEmailFieldError,
+	signInSchema,
+} from "#/lib/auth/schema";
 
-const SignInForm = () => {
-	const form = useSignInForm();
+export interface SignInFormProps {
+	form: ReturnType<typeof useSignInForm>;
+}
 
+const SignInForm = ({ form }: SignInFormProps) => {
 	const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		form.handleSubmit();
-		console.log("submit");
 	};
 
 	return (
@@ -24,22 +30,32 @@ const SignInForm = () => {
 			<FieldGroup>
 				<form.Field
 					name="email"
+					validators={{
+						onBlur: emailSchema,
+						onChange: ({ value, fieldApi }) =>
+							fieldApi.state.meta.isBlurred
+								? getEmailFieldError(value)
+								: undefined,
+					}}
 					children={(field) => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid;
+
 						return (
 							<Field>
 								<FieldLabel htmlFor={field.name}>Email</FieldLabel>
 								<Input
 									id={field.name}
+									name={field.name}
+									aria-invalid={isInvalid}
 									value={field.state.value}
 									onChange={(e) => field.handleChange(e.target.value)}
+									onBlur={field.handleBlur}
 									className="w-full border"
 								/>
-								{/* TODO: Add error message */}
-								{field.state.meta?.errors && (
+								{isInvalid && (
 									<FieldError>
-										{field.state.meta.errors
-											.map((error) => error?.message)
-											.join(", ")}
+										{getEmailFieldError(field.state.value)}
 									</FieldError>
 								)}
 							</Field>
@@ -48,17 +64,31 @@ const SignInForm = () => {
 				/>
 				<form.Field
 					name="password"
+					validators={{ onChange: signInSchema.shape.password }}
 					children={(field) => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid;
+
 						return (
 							<Field>
 								<FieldLabel htmlFor={field.name}>Password</FieldLabel>
 								<Input
 									id={field.name}
 									type="password"
+									name={field.name}
+									aria-invalid={isInvalid}
 									value={field.state.value}
 									onChange={(e) => field.handleChange(e.target.value)}
 									className="w-full border"
+									onBlur={field.handleBlur}
 								/>
+								{isInvalid && (
+									<FieldError>
+										{field.state.meta.errors
+											.map((error) => error?.message)
+											.join(", ")}
+									</FieldError>
+								)}
 							</Field>
 						);
 					}}
