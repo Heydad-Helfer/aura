@@ -9,6 +9,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { AppShell } from "#/components/layout/AppShell/AppShell";
 import { ErrorPage } from "#/components/layout/error/Error";
 import Footer from "#/components/layout/Footer/Footer";
 import { Header } from "#/components/layout/Header/Header";
@@ -53,11 +54,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body className="font-sans antialiased wrap-anywhere">
 				<ClerkProvider appearance={{ theme: shadcn }}>
-					<div className="flex min-h-dvh flex-col">
+					<AppShell>
 						<Header />
-						<main className="flex-1">{children}</main>
+						<main className="mx-auto w-full max-w-7xl flex-1 px-5 md:px-10">
+							{children}
+						</main>
 						<Footer />
-					</div>
+					</AppShell>
 				</ClerkProvider>
 				<Toaster />
 				<TanStackDevtools

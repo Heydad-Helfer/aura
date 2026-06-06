@@ -1,16 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AuthCard } from "@/components/auth/AuthCard";
-import { HeroSection } from "@/components/marketing/HeroSection";
+import { auth } from "@clerk/tanstack-react-start/server";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 
-export const Route = createFileRoute("/")({ component: Home });
+const checkAuth = createServerFn().handler(async () => {
+	const { isAuthenticated } = await auth();
+	return { isAuthenticated };
+});
 
-function Home() {
-	return (
-		<div>
-			<HeroSection />
-			<div className="mx-auto w-full max-w-lg">
-				<AuthCard />
-			</div>
-		</div>
-	);
-}
+export const Route = createFileRoute("/")({
+	beforeLoad: async () => {
+		const { isAuthenticated } = await checkAuth();
+
+		throw redirect({
+			to: isAuthenticated ? "/dashboard" : "/sign-in/$",
+		});
+	},
+});

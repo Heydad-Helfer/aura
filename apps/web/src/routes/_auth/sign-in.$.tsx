@@ -7,12 +7,15 @@ export const Route = createFileRoute("/_auth/sign-in/$")({
 
 function RouteComponent() {
 	return (
-		<section id="sign-in" className="mx-auto w-full max-w-md mt-16">
+		<section
+			id="sign-in"
+			className="flex-1 flex items-center justify-center mt-16"
+		>
 			<SignIn
 				routing="path"
 				path="/sign-in"
 				signUpUrl="/sign-up"
-				fallbackRedirectUrl="/"
+				fallbackRedirectUrl="/dashboard"
 			/>
 		</section>
 	);

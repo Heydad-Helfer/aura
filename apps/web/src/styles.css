@@ -238,6 +238,24 @@ body {
 	}
 }
 
+@layer components {
+	.header {
+		& .header-nav-link {
+			@apply px-4 py-2 text-xs md:text-sm font-medium transition-[color] text-center;
+		}
+
+		& .header-nav-link-active {
+			@apply 
+			inset-20 shadow-[var(--primary)_-10px_-5px_-4px_0px]
+			text-primary border-b-2 border-primary hover:text-primary hover:border-primary;
+		}
+
+		& .header-nav-link-inactive {
+			@apply text-on-surface-variant hover:text-on-surface;
+		}
+	}
+}
+
 @layer utilities {
 	.shadow-ambient {
 		box-shadow: 0 4px 20px color-mix(in oklch, var(--on-surface) 5%, transparent);
