@@ -10,7 +10,7 @@ export function AuthCard() {
 				<Show when="signed-out">
 					<div className="flex justify-center items-center gap-4">
 						<Link
-							to="/sign-in/$"
+							to="/sign-up/$"
 							className={cn(
 								buttonVariants({ variant: "default" }),
 								"flex-1 h-12 rounded-full",
@@ -20,7 +20,7 @@ export function AuthCard() {
 						</Link>
 
 						<Link
-							to="/sign-up/$"
+							to="/sign-in/$"
 							className={cn(
 								buttonVariants({ variant: "outline" }),
 								"flex-1 h-12 rounded-full",

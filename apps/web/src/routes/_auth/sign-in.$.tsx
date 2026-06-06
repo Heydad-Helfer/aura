@@ -1,10 +1,19 @@
+import { SignIn } from "@clerk/tanstack-react-start";
 import { createFileRoute } from "@tanstack/react-router";
-import SignIn from "@/components/pages/auth/SignIn/SignIn";
 
 export const Route = createFileRoute("/_auth/sign-in/$")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	return <SignIn />;
+	return (
+		<section id="sign-in" className="mx-auto w-full max-w-md mt-16">
+			<SignIn
+				routing="path"
+				path="/sign-in"
+				signUpUrl="/sign-up"
+				fallbackRedirectUrl="/"
+			/>
+		</section>
+	);
 }

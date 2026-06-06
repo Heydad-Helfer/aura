@@ -3,6 +3,8 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/plus-jakarta-sans";
 @import "@fontsource-variable/inter";
+@import '@clerk/ui/themes/shadcn.css';
+
 
 @custom-variant dark (&:is(.dark *));
 

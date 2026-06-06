@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/tanstack-react-start";
+import { shadcn } from "@clerk/ui/themes";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
 import type { QueryClient } from "@tanstack/react-query";
@@ -51,7 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased wrap-anywhere">
-				<ClerkProvider>
+				<ClerkProvider appearance={{ theme: shadcn }}>
 					<div className="flex min-h-dvh flex-col">
 						<Header />
 						<main className="flex-1">{children}</main>

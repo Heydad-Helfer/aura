@@ -1,3 +1,4 @@
+import { Show, UserButton } from "@clerk/tanstack-react-start";
 import { Link } from "@tanstack/react-router";
 
 export function Header() {
@@ -15,6 +16,9 @@ export function Header() {
 					Aura
 				</span>
 			</Link>
+			<Show when="signed-in">
+				<UserButton />
+			</Show>
 			<button
 				type="button"
 				className="text-sm font-medium text-on-surface-variant transition-colors hover:text-foreground"

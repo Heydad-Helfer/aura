@@ -34,7 +34,6 @@ const SignIn = () => {
 				<form.Subscribe
 					selector={(state) => [state.canSubmit, state.isSubmitting]}
 					children={([canSubmit, isSubmitting]) => {
-						console.log(canSubmit, isSubmitting);
 						return (
 							<Button
 								type="submit"
