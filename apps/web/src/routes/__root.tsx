@@ -53,7 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased wrap-anywhere">
-				<ClerkProvider appearance={{ theme: shadcn }}>
+				<ClerkProvider appearance={{ theme: shadcn, cssLayerName: "clerk" }}>
 					<AppShell>
 						<Header />
 						<main className="mx-auto w-full max-w-7xl flex-1 px-5 md:px-10">

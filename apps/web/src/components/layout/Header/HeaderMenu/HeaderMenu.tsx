@@ -47,18 +47,25 @@ function HeaderMenuSignedIn() {
 
 	return (
 		<>
-			<DropdownMenuGroup className="bg-primary-container/20 rounded-lg">
-				<div className="flex items-center px-2 py-2 gap-4">
+			<DropdownMenuGroup className="bg-primary-container/20 rounded-lg py-2 px-2">
+				<div className="">
 					<UserButton
 						showName={true}
 						fallback={user?.fullName?.charAt(0)}
+						appearance={{
+							elements: {
+								rootBox: "w-full align-middle",
+								userButtonTrigger: "w-full justify-start",
+								userButtonBox: "flex flex-row-reverse",
+							},
+						}}
 					></UserButton>
-					<div className="grid flex-1 text-left text-sm leading-tight">
+					{/* <div className="grid flex-1 text-left text-sm leading-tight">
 						<span className="truncate font-medium">{user?.fullName}</span>
 						<span className="truncate text-xs text-on-surface-variant">
 							{user?.emailAddresses[0]?.emailAddress}
 						</span>
-					</div>
+					</div> */}
 				</div>
 			</DropdownMenuGroup>
 
